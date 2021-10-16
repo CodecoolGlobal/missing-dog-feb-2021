@@ -1,0 +1,2 @@
+- learn the Optional API
+- review and practise Streams API
