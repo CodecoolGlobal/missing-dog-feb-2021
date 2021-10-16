@@ -3,6 +3,7 @@ package com.codecool.missing_dog.repository;
 import com.codecool.missing_dog.model.Owner;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class OwnerRepository {
@@ -20,12 +21,16 @@ public class OwnerRepository {
      * @return optional of Owner
      */
     public Optional<Owner> getById(int id) {
-        throw new UnsupportedOperationException("Not implemented yet");
+
+        return data.stream()
+            .filter(owner -> owner.getId() == id)
+            .findFirst();
     }
 
     /**
      * @return list of all owners
      */
+
     public List<Owner> getAll() {
         return data;
     }
@@ -38,6 +43,8 @@ public class OwnerRepository {
      * @return optional of Owner
      */
     public Optional<Owner> getByEmail(String value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return data.stream()
+            .filter(owner -> Objects.equals(owner.getEmail(), value))
+            .findFirst();
     }
 }

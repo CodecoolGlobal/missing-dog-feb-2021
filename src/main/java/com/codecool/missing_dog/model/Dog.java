@@ -81,6 +81,6 @@ public class Dog {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, dateOfBirth, isMale, breed, isSociable, owner);
+        return Objects.hash(id, name, dateOfBirth, isMale, breed, isSociable);
     }
 }

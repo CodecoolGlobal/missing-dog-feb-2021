@@ -3,7 +3,9 @@ package com.codecool.missing_dog.repository;
 import com.codecool.missing_dog.model.Dog;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class DogRepository {
     private final List<Dog> data;
@@ -20,7 +22,9 @@ public class DogRepository {
      * @return optional of Dog
      */
     public Optional<Dog> getById(int id) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return data.stream()
+            .filter(dog -> dog.getId() == id)
+            .findFirst();
     }
 
     /**
@@ -38,7 +42,12 @@ public class DogRepository {
      * @return owner's phone number
      */
     public Optional<String> getOwnerPhoneNoByDogId(int id) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return data.stream()
+            .filter(dog -> dog.getId() == id)
+//            .map(Dog::getOwner)
+//            .map(Owner::getPhoneNo)
+            .map(dog -> dog.getOwner().getPhoneNo())
+            .findFirst();
     }
 
     /**
@@ -49,7 +58,12 @@ public class DogRepository {
      * @return owner's email
      */
     public Optional<String> getOwnerEmailByDogId(int id) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return data.stream()
+            .filter(dog -> dog.getId() == id)
+//            .map(Dog::getOwner)
+//            .map(Owner::getPhoneNo)
+            .map(dog -> dog.getOwner().getEmail())
+            .findFirst();
     }
 
     /**
@@ -71,7 +85,9 @@ public class DogRepository {
      * @return list of dogs of given breed
      */
     public List<Dog> getDogsByBreed(String breed) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return data.stream()
+            .filter(dog -> Objects.equals(dog.getBreed(), breed))
+            .collect(Collectors.toList());
     }
 
     /**
@@ -94,7 +110,9 @@ public class DogRepository {
      * @return list of dogs owned by specific owner
      */
     public List<Dog> getDogsByOwnerId(int id) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return data.stream()
+            .filter(dog -> dog.getOwner().getId() == id)
+            .collect(Collectors.toList());
     }
 
     /**
@@ -105,7 +123,9 @@ public class DogRepository {
      * @return number of dogs the owner has
      */
     public int getOwnerDogCountByDogId(int id) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return (int) data.stream()
+            .filter(dog -> dog.getOwner().getId() == id)
+            .count();
     }
 
     /**
